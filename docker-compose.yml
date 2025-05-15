@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  notification-service:
+    image: "githubname/image_name:latest"
+    container_name: notification-service
+    restart: always
+    ports:
+      - "8015:8000"
+    env_file:
+      - .env.notif
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  notification-workers1:
+    image: "githubname/image_name:latest"
+    container_name: notification-worker
+    restart: always
+    env_file:
+      - .env.notif
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
